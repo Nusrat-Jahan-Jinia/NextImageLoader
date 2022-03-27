@@ -1,13 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import axios from "axios";
-import Image from "next/image";
 import { getPosts } from "../api/GhostAPI";
-
-const src = "http://jam.innovatorslab.net/content/images/size/";
-const width = "small";
-const cmsUrl =
-  "http://jam.innovatorslab.net/content/images/size/w2000/2022/03/203606348_4427603440607945_4362144530588195926_n.jpeg";
 
 const myLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`;
@@ -21,7 +14,7 @@ export async function getStaticProps(context) {
   };
 
   let data = await getPosts(fetchedNews);
-  console.log(data);
+  // console.log(data);
 
   return {
     props: {
@@ -47,10 +40,11 @@ export default function Home(props) {
           </h1>
 
           <ul>
-            {props.posts.map(post => (
+            {props.posts.map((post) => (
               <li>
                 {post.title}
-                <Image
+                <img src={post.feature_image} width="231" height="126" />
+                {/* <Image
                   loader={myLoader}
                   alt={post.title}
                   src={
@@ -60,7 +54,7 @@ export default function Home(props) {
                   }
                   width="231"
                   height="126"
-                />
+                /> */}
               </li>
             ))}
           </ul>
